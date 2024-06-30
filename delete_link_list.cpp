@@ -35,8 +35,10 @@ void delete_at_head(Node *&head, Node *&tail)
 void delete_at_tail(Node *&head, Node *&tail)
 {
     Node *deleteNode = tail;
-    if (tail == NULL) return;
-    if(tail->prev == NULL){
+    if (tail == NULL)
+        return;
+    if (tail->prev == NULL)
+    {
         head = NULL;
         tail = NULL;
         delete deleteNode;
@@ -59,6 +61,36 @@ int size(Node *head)
     return count;
 }
 
+void delete_at_position(Node *&head, Node *&tail, int pos)
+{
+    Node *deleteNode = head;
+    int element = size(head);
+    if (pos >= element)
+    {
+        cout << "Invalid position" << endl;
+        return;
+    }
+    if (pos == 0)
+    {
+        delete_at_head(head, tail);
+        return;
+    }
+    if (pos == element - 1)
+    {
+        delete_at_tail(head, tail);
+        return;
+    }
+    for (int i = 0; i < pos; i++)
+    {
+        deleteNode = deleteNode->next;
+    }
+    deleteNode->prev->next = deleteNode->next;
+    deleteNode->next->prev = deleteNode->prev;
+    delete deleteNode;
+}
+
+
+
 void print(Node *head)
 {
     if (head == NULL)
@@ -73,6 +105,20 @@ void print(Node *head)
         temp = temp->next;
     }
     cout << endl;
+}
+
+void insert_at_tail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (tail == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
 }
 
 int main()
@@ -91,6 +137,14 @@ int main()
     delete_at_tail(head, tail);
     print(head);
     delete_at_tail(head, tail);
+    print(head);
+    insert_at_tail(head, tail, 10);
+    insert_at_tail(head, tail, 20);
+    insert_at_tail(head, tail, 30);
+    insert_at_tail(head, tail, 40);
+    insert_at_tail(head, tail, 50);
+    print(head);
+    delete_at_position(head, tail, 5);
     print(head);
     return 0;
 }
