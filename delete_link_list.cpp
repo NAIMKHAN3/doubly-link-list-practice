@@ -106,6 +106,21 @@ void print(Node *head)
     }
     cout << endl;
 }
+void print_reverse(Node *tail)
+{
+    if (tail == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node *temp = tail;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->prev;
+    }
+    cout << endl;
+}
 
 void insert_at_tail(Node *&head, Node *&tail, int val)
 {
@@ -146,5 +161,6 @@ int main()
     print(head);
     delete_at_position(head, tail, 5);
     print(head);
+    print_reverse(tail);
     return 0;
 }

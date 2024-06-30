@@ -27,6 +27,22 @@ void print(Node * head){
     cout << endl;
 }
 
+void print_reverse(Node *tail)
+{
+    if (tail == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node *temp = tail;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->prev;
+    }
+    cout << endl;
+}
+
 int main()
 {
     Node * head = new Node(10);
