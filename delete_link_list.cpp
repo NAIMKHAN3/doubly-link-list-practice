@@ -32,6 +32,20 @@ void delete_at_head(Node *&head, Node *&tail)
     delete deleteNode;
 }
 
+void delete_at_tail(Node *&head, Node *&tail)
+{
+    Node *deleteNode = tail;
+    if (tail == NULL) return;
+    if(tail->prev == NULL){
+        head = NULL;
+        tail = NULL;
+        delete deleteNode;
+        return;
+    }
+    tail->prev->next = NULL;
+    tail = tail->prev;
+    delete deleteNode;
+}
 
 int size(Node *head)
 {
@@ -72,11 +86,11 @@ int main()
     b->prev = a;
     Node *tail = b;
     print(head);
-    delete_at_head(head, tail);
+    delete_at_tail(head, tail);
     print(head);
-    delete_at_head(head, tail);
+    delete_at_tail(head, tail);
     print(head);
-    delete_at_head(head, tail);
+    delete_at_tail(head, tail);
     print(head);
     return 0;
 }
