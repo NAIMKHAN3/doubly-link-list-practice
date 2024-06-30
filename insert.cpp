@@ -27,7 +27,19 @@ void insert_at_head(Node *&head, int val)
     head->prev = newNode;
     head = newNode;
 }
-
+void insert_at_tail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (tail == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
+}
 
 void print(Node *head)
 {
@@ -51,7 +63,7 @@ int main()
     b->prev = a;
     Node *tail = b;
     insert_at_head(head, 100);
-    
+    insert_at_tail(head, tail, 200);
     print(head);
     return 0;
 }
