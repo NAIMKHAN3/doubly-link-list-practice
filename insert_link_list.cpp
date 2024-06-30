@@ -15,12 +15,13 @@ public:
     }
 };
 
-void insert_at_head(Node *&head, int val)
+void insert_at_head(Node *&head, Node *& tail, int val)
 {
     Node *newNode = new Node(val);
     if (head == NULL)
     {
         head = newNode;
+        tail = newNode;
         return;
     }
     newNode->next = head;
@@ -56,9 +57,7 @@ void insert_at_position(Node *&head, Node *&tail, int pos, int val)
     Node *newNode = new Node(val);
     if (pos == 0)
     {
-        head->prev = newNode;
-        newNode->next = head;
-        head = newNode;
+        insert_at_head(head, tail, val);
         return;
     }
     int element = size(head);
@@ -104,9 +103,9 @@ int main()
     a->next = b;
     b->prev = a;
     Node *tail = b;
-    insert_at_head(head, 100);
+    insert_at_head(head,tail, 100);
     insert_at_tail(head, tail, 200);
-    insert_at_position(head, tail, 5, 50);
+    insert_at_position(head, tail, 0, 50);
     print(head);
     return 0;
 }
